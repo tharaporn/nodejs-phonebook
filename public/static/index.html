@@ -1,0 +1,25 @@
+<ul class="breadcrumb">
+  <li><a href="#">Home <i class="icon-home"></i></a> <span class="divider">/</span></li>  
+</ul>
+
+<div class="span6">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th> 
+        <th>Fax</th> 
+        <th><a href="#/add/contact"><i class="icon-plus-sign"></i></a></th>     
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="contact in contact_list">
+        <td><a href="#/edit/contact/{{contact._id.$oid}}">{{contact.name}}</a></td>
+        <td>{{contact.phone}}</td>     
+        <td>{{contact.fax}}</td>  
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

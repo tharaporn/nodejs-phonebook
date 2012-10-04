@@ -1,0 +1,9 @@
+{
+  "name" : "nodejs-phonebook",
+  "version" : "0.0.1",
+  "dependencies" : {
+    "express" : "*",        
+    "hbs" : "*"    
+  }
+}
+
