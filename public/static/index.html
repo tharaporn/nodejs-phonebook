@@ -1,25 +1,82 @@
 <ul class="breadcrumb">
-  <li><a href="#">Home <i class="icon-home"></i></a> <span class="divider">/</span></li>  
+  <li><a href="#">Home <i class="icon-home"></i></a> <span class="divider"></span></li>  
 </ul>
 
-<div class="span6">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Phone</th> 
-        <th>Fax</th> 
-        <th><a href="#/add/contact"><i class="icon-plus-sign"></i></a></th>     
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="contact in contact_list">
-        <td><a href="#/edit/contact/{{contact._id.$oid}}">{{contact.name}}</a></td>
-        <td>{{contact.phone}}</td>     
-        <td>{{contact.fax}}</td>  
-      </tr>
-    </tbody>
-  </table>
+<div class="row-fluid">
+  <div class="span6">
+    <div class="input-prepend">
+        <span class="add-on"><i class="icon-search"></i></span>
+        <input type="text" placeholder="Search" ng-model="search">    
+    </div>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th> 
+          <th>Fax</th> 
+          <th><a href="" ng-click="add()"><i class="icon-plus-sign"></i></a></th>     
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="contact in contact_list |  filter:search ">
+          <td><a href="" ng-click="get(contact._id.$oid)">{{contact.name}}</a></td>
+          <td>{{contact.phone}}</td>     
+          <td>{{contact.fax}}</td>  
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="span6">        
+    <form class="form-horizontal well" ng-show="contact">      
+      <div class="control-group">
+        <label class="control-label" for="inputName">Name: <i class="icon-user"></i></label>
+        
+        <div class="controls">
+          <input type="text" id="inputName" placeholder="Name" ng-model="contact.name">
+              </div>
+      </div>
+      
+      <div class="control-group">
+        <label class="control-label" for="inputName">Address: <i class="icon-list"></i></label> 
+        <div class="controls">
+          <input type="text" id="inputName" placeholder="Address" ng-model="contact.address">
+              </div>
+      </div>
+      
+      <div class="control-group">
+        <label class="control-label" for="inputName">Phone: <i class=" icon-lock"></i></label>
+        <div class="controls">
+          <input type="text" id="inputName" placeholder="Phone" ng-model="contact.phone">
+              </div>
+      </div>
+      
+      <div class="control-group">
+        <label class="control-label" for="inputName">Fax: <i class="icon-inbox"></i></label>
+        <div class="controls">
+          <input type="text" id="inputName" placeholder="Fax" ng-model="contact.fax">
+              </div>
+      </div>  
+      
+      <div class="control-group">
+        <label class="control-label" for="inputName">E-mail: <i class="icon-envelope"></i></label>
+        <div class="controls">
+          <input type="text" id="inputName" placeholder="E-mail" ng-model="contact.email">
+              </div>
+      </div>
+      
+      
+      <div class="control-group">                 
+        <div class="controls">
+          <button ng-click="save()" class="btn btn-primary btn-small" type="submit"> <i class="icon-ok icon-white"></i> Save</button>                    
+          <button ng-click="destroy()" ng-show="contact._id" class="btn btn-danger btn-small"><i class="icon-remove icon-white"></i> Delete</button>
+          <button ng-click="contact = null" class="btn btn-info btn-small">Cancel</button>
+        </div>
+      </div>
+    </form>    
+  </div>
+  
 </div>
 
 

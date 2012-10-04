@@ -14,30 +14,47 @@ app.config(function($routeProvider) {
   });    	
   
   $routeProvider.when('/', {
-    controller:MongoController, 
+    controller:ContactController, 
     templateUrl:'static/index.html'
   });    	
 });
 
-function ContactController($scope, $routeParams, $location, Contact) {
+function ContactController($scope, $location, Contact) {
   var self = this;
   
-  Contact.get({id:$routeParams.contactId}, function(response) {
-    self.original = response;
-    $scope.contact = new Contact(self.original);
-    //console.log(response);
-  }); 
+  $scope.contact_list = Contact.query(); 
   
-  $scope.save = function() {        
-    $scope.contact.update(function() {
-      $location.path('/');
-    });    
+  $scope.get = function(contactId) {
+    Contact.get({id:contactId}, function(response) {
+      self.original = response;
+      $scope.contact = new Contact(self.original);      
+    }); 
+  };
+  
+  $scope.add = function() {
+    $scope.contact = new Contact();      
+  };
+  
+  
+  $scope.save = function() {  
+    if($scope.contact._id) {      
+      $scope.contact.update(function() {
+        $scope.contact_list = Contact.query(); 
+      // $location.path('/');
+      });    
+    } else {
+        Contact.save($scope.contact, function(response) {
+          $scope.contact_list = Contact.query(); 
+        });    
+    }
   };     
   
   $scope.destroy = function() {
     self.original.destroy(function(response) {
-      console.log(response);
-      $location.path('/');
+      $scope.contact_list = Contact.query(); 
+      $scope.contact = null;
+      //console.log(response);
+      //$location.path('/');
     });
   };
 }
@@ -51,8 +68,4 @@ function CreateContactController($scope, $location, Contact) {
   };  
 }
 
-
-function MongoController($scope, Contact) {
-  $scope.contact_list = Contact.query();  
-}
 
