@@ -7,6 +7,7 @@
     <base href="{{ baseHref }}">
     
     <link href="javascript/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="javascirpt/vendor/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -24,8 +25,7 @@
 </head>
     
     
-<body ng-app="phonebook">
-  
+<body ng-app="phonebook">  
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -36,13 +36,18 @@
         </a>
         <a class="brand" href="#">Phone Book System</a>
         
-
-      
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><a href="#"><i class="icon-home icon-white"></i> Home </a></li>                                              
+          </ul>
+        </div>                      
       </div>
     </div>
   </div>  
   
   {{{body}}} 
-  <div class="container" ng-view></div>
+  <div class="container">
+    <div ng-view></div>
+  </div>
 </body>
 </html>
